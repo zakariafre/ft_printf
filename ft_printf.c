@@ -6,7 +6,7 @@
 /*   By: zahrabar <zahrabar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:40:00 by zahrabar          #+#    #+#             */
-/*   Updated: 2025/11/21 06:25:18 by zahrabar         ###   ########.fr       */
+/*   Updated: 2025/11/21 07:29:03 by zahrabar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int	ft_printf(const char *param, ...)
 	int		i;
 	int		n;
 
-	va_start(list, param);
 	i = 0;
 	n = 0;
+	va_start(list, param);
+	if (write(1, "", 0) == -1)
+		return (-1);
 	while (param[i])
 	{
 		if (param[i] == '%' && param[i + 1] == '%')
@@ -51,10 +53,7 @@ int	ft_printf(const char *param, ...)
 			i++;
 		}
 		else if (param[i] == '%' && param[i + 1])
-		{
-			i++;
-			n += format_case(param[i], &list);
-		}
+			n += format_case(param[++i], &list);
 		else
 			n += ft_chrprint(param[i]);
 		i++;
