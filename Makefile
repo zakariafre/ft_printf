@@ -31,7 +31,4 @@ clean :
 fclean : clean
 	@$(RM) $(NAME)
 
-test : $(OBJ) $(NAME) main.c
-	@$(CC) $(CFLAGS) main.c $(NAME) -o main && ./main
-
 re : fclean all
